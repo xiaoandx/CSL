@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html" charset=utf-8> 
+    <title>CSLEToExcelContent</title>
+    <script src="./js/jquery-3.7.1.min.js"></script>
+    <style>
+      textarea{
+        margin: 10px 0 10px 0px;
+      }
+      button{
+        margin: 10px 50px 10px 0px;
+      }
+      .bottomDiv{
+        width: 100%;
+        height: 100px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .bottomDiv p{
+        color: #dee1e6
+      }
+    </style>
+  </head>
+  <bady>
+    <div class="inputDiv">
+      <textarea rows="15" name="csleenum" cols="250" placeholder="Label枚举"></textarea>
+    </div>
+    <div class="buttonDiv">
+      <button class="getUserlabel">转换为userLabelCSV格式内容</button>
+      <button class="getDictionary">转换为DictionaryCSV格式内容</button>
+    </div>
+    <div class="outputDiv">
+      <textarea rows="15" name="excelUserLabel" cols="250" placeholder="excelUserLabel"></textarea>
+      <textarea rows="15" name="excelDictionary" cols="250" placeholder="excelDictionary"></textarea>
+    </div>
+    <div class="bottomDiv">
+      <p>Copyright WEI.ZHOU Version V1.0</p>
+    </div>
+  </bady>
+  <script>
+    $(function(){
+
+      $(".getUserlabel").click(function(){
+        let t = $("textarea[name=csleenum]").val();
+        console.log(t)
+        t = t.replace(/        /g,"");
+        t = t.replace(/    @/g,"@");
+        const pattern = /@\"\Chinese:(.+?)"\,\n@\"\English:(.+?)"\n\)\]\n([A-Z]_[A-Za-z0-9_]+)/g
+        let match;
+        const res = [];
+        let csvContent = "LabelName,Chinese,English\n";
+        while((match = pattern.exec(t)) !== null)
+        {
+          const ch = match[1].trim();
+          const en = match[2].trim().replace(/['\"\\\\/\\”\\“\\，\\]/g,"");
+          const c = match[3].trim().replace(/['\"\\\\/\\”\\“\\，\\]/g,"")
+          res.push({c,ch,en});
+        }
+        res.forEach((item) => {
+          csvContent += `${item.c}^${item.ch}^${item.en}\n`;
+        })
+        $("textarea[name=excelUserLabel]").val(csvContent);
+      })
+
+      $(".getDictionary").click(function(){
+        let t = $("textarea[name=csleenum]").val();
+        console.log(t)
+        t = t.replace(/        /g,"");
+        t = t.replace(/    @/g,"@");
+        const pattern = /@\"\Chinese:(.+?)"\,\n@\"\English:(.+?)"\n\)\]\n([A-Z]_[A-Za-z0-9_]+)/g
+        let match;
+        const res = [];
+        let csvContent = "LabelName,is,Chinese\n";
+        while((match = pattern.exec(t)) !== null)
+        {
+          const ch = match[1].trim();
+          const en = match[2].trim().replace(/['\"\\\\/\\”\\“\\，\\]/g,"");
+          const c = match[3].trim().replace(/['\"\\\\/\\”\\“\\，\\]/g,"")
+          res.push({c,ch,en});
+        }
+        res.forEach((item) => {
+          csvContent += `${item.c}^true^${item.ch}\n`;
+        })
+        $("textarea[name=excelDictionary]").val(csvContent);
+      })
+
+    })
+  </script>
+</html>
