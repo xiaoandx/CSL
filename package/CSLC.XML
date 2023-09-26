@@ -1,0 +1,189 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CSLC</name>
+    </assembly>
+    <members>
+        <member name="T:CSLC.Core.CL">
+            <summary>
+            Label枚举标识类，用于记录双语翻译LabelValue
+            </summary>
+        </member>
+        <member name="P:CSLC.Core.CL.Chinese">
+            <summary>
+            Chinese类型LabelValue
+            </summary>
+        </member>
+        <member name="P:CSLC.Core.CL.English">
+            <summary>
+            English类型LabelValue
+            </summary>
+        </member>
+        <member name="P:CSLC.Core.CSL.Msg">
+            <summary>
+            系统Label字典对象
+            </summary>
+        </member>
+        <member name="M:CSLC.Core.CSL.Get(System.Enum)">
+            <summary>
+            Label字典中获取指定Label，如果获取指点LabelName不存在会throw异常
+            </summary>
+            <param name="LabelName">枚举类型LabelName</param>
+            <returns>Labelvalue</returns>
+        </member>
+        <member name="M:CSLC.Core.CSL.Get(System.Enum,System.Object[])">
+            <summary>
+            Label字典中获取指定Label，如果获取指点LabelName不存在会throw异常,参数个数小于Label中替换标识数量也会throw异常
+            <para>
+            Label获取后接收参入格式化参数，即使用类似string.Format()。需要注意的Label中的【替换标识】必须以#开头，空格结尾；【参数顺序】与【替换标识】顺序保持一致
+            </para>
+            <para>
+            单个替换标识正确使用：CSL.Get(CLSE.CombineLot_E0002,"20230616001");(CLSE.CombineLot_E0002内容为：#CONTAINER 处于 INTRANSIT 工步 - 不允许合并)
+            </para>
+            <para>
+            多个替换标识正确使用：CSL.Get(CLSE.CombineLot_E0003,"20230616001",1000);(CLSE.CombineLot_E0002内容为：#CONTAINER 的Qty为：#QTY )
+            </para>
+            </summary>
+            <param name="LabelName">LabelName</param>
+            <param name="args">参数(0-n)</param>
+            <returns>格式化后的Value</returns>
+        </member>
+        <member name="M:CSLC.Core.CSL.ExtractIdentifiers(System.String)">
+            <summary>
+            清洗获取LabelValue中的替换标签
+            </summary>
+            <param name="input"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CSLC.Core.CSL.RelpaceIdentifiers(System.String,System.String[],System.Object[])">
+            <summary>
+            替换标识标签（按照传参顺序）
+            </summary>
+            <param name="input"></param>
+            <param name="identifiers"></param>
+            <param name="parameters"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CSLC.Core.CSL.GetEnumAtt(System.Enum,System.String)">
+            <summary>
+            获取Label枚举属性上的标签中的labelValue
+            </summary>
+            <param name="_key"></param>
+            <param name="_Language"></param>
+            <returns></returns>
+        </member>
+        <member name="M:CSLC.Core.CSL.LoadSysMsgLabel">
+            <summary>
+            Application 启动时数据库查询UserLabel数据，转换为Dictionary对象保存在内存中，
+            判断查询指定地区的UserLabel是参考Web.config中的Region配置，地区类别名称必须在Camstar Dictionary中存在如： (Chinese、English)
+            </summary>
+        </member>
+        <member name="M:CSLC.Core.CSL.GetRegion">
+            <summary>
+            获取Web.config中的Region配置，默认Chinese
+            </summary>
+            <returns>Region配置：Chinese或English</returns>
+        </member>
+        <member name="T:CSLC.Core.Msg">
+            <summary>
+            数据库UserLabel数据字段映射
+            </summary>
+        </member>
+        <member name="T:CSLC.Core.CSLCDBHelper">
+            <summary>
+            [封装、丰富对Oracle数据库的操作]
+            </summary>
+        </member>
+        <member name="F:CSLC.Core.LanguageTool.LOCALE_SYSTEM_DEFAULT">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:CSLC.Core.LanguageTool.LOCALE_SIMPLIFIED_CHINESE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="F:CSLC.Core.LanguageTool.LOCALE_TRADITIONAL_CHINESE">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:CSLC.Core.LanguageTool.SimplifiedToTraditional(System.String)">
+            <summary>
+            简体轉成繁體
+            </summary>
+            <param name="Text"></param>
+            <returns></returns>
+        </member>
+        <member name="P:CSLC.Core.Result.bSucc">
+            <summary>
+            执行是否成功
+            </summary>
+        </member>
+        <member name="P:CSLC.Core.Result.strCode">
+            <summary>
+            结果代码(0000=成功，其余为错误代码)
+            </summary>
+        </member>
+        <member name="P:CSLC.Core.Result.strMsg">
+            <summary>
+            错误讯息
+            </summary>
+        </member>
+        <member name="P:CSLC.Core.Result.DataTime">
+            <summary>
+            资料时间
+            </summary>
+        </member>
+        <member name="P:CSLC.Core.Result.Content">
+            <summary>
+            资料详细内容
+            </summary>
+        </member>
+        <member name="M:CSLC.Core.Result.#ctor">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:CSLC.Core.Result.#ctor(System.Object)">
+            <summary>
+            建立成功结果
+            </summary>
+            <param name="_data"></param>
+        </member>
+        <member name="M:CSLC.Core.Result.#ctor(System.String,System.String,System.Object)">
+            <summary>
+            建立失败结果
+            </summary>
+            <param name="_code"></param>
+            <param name="_msg"></param>
+            /// <param name="_data"></param>
+        </member>
+        <member name="M:CSLC.Core.CSLCSystem.LoadSysMsgLabel(System.String@)">
+            <summary>
+            Application 启动时数据库查询UserLabel数据，转换为Dictionary对象保存在内存中，
+            判断查询指定地区的UserLabel是参考Web.config中的Region配置，地区类别名称必须在Camstar Dictionary中存在如： (Chinese、English)
+            </summary>
+        </member>
+        <member name="M:CSLC.Core.CSLCSystem.LoadSysMsgLabel">
+            <summary>
+            Application 启动时数据库查询UserLabel数据，转换为Dictionary对象保存在内存中，
+            判断查询指定地区的UserLabel是参考Web.config中的Region配置，地区类别名称必须在Camstar Dictionary中存在如： (Chinese、English)
+            </summary>
+        </member>
+        <member name="M:CSLC.Core.CSLCSystem.GetRegion">
+            <summary>
+            获取Web.config中的Region配置，默认Chinese
+            </summary>
+            <returns>Region配置：Chinese或English</returns>
+        </member>
+        <member name="M:CSLC.Core.CSLCSystem.StrTimeSlot(System.Diagnostics.Stopwatch)">
+            <summary>
+            计时结束
+            </summary>
+            <param name="timer"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
