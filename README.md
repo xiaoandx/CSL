@@ -212,7 +212,7 @@
 
 # 第4章 CSL主要方法 
 
-## 4.1 CSL.Get(Enum labelName) {#csl.getenum-labelname .unnumbered}
+## 4.1 CSL.Get(Enum labelName)
 
 ​		获取不带参数标识的Value，预先在内存中的Label字典中获取指定Label，如果获取指点LabelName不存在则会获取CSLE枚举类中的配置，如果CSLE中也不存在则相应对应异常信息。
 
@@ -236,15 +236,15 @@ string siteName = CSL.Get(CSLE.A_SiteName_T0001)
 ​		多个替换标识正确使用：CSL.Get(CLSE.CombineLot_E0003,\"20230616001\",1000);(CLSE.CombineLot_E0002内容为：#CONTAINER
 的Qty为：#QTY )
 
-## 4.3 CSLCSystem.LoadSysMsgLabel() {#cslcsystem.loadsysmsglabel .unnumbered}
+## 4.3 CSLCSystem.LoadSysMsgLabel() 
 
 ​		Application启动时数据库查询UserLabel数据，转换为Dictionary对象保存在内存中，判断查询指定地区的UserLabel是参考Web.config中的Region配置，地区类别名称必须在Camstar Dictionary中存在如： (Chinese、English)。
 
-## 4.4 CSLCSystem.Execute() {#cslcsystem.execute .unnumbered}
+## 4.4 CSLCSystem.Execute() 
 
 ​		该接口亦是更新内存的UserLabel数据，调用该方法，会根据配置语言环境信息加载Camstar中最新的UserLabel数据到内容中。
 
-## 4.4 Other {#other .unnumbered}
+## 4.4 Other 
 
 ​		CS类库中还有许多的操作数据库方法，如果有需求，可以在issue中提出，开发者进行CSL升级及修改等。更多使用方法需要在使用中去探索\...\...
 
@@ -272,7 +272,7 @@ string siteName = CSL.Get(CSLE.A_SiteName_T0001)
 
 ​		例如，如果我们有一个属性用于存储产品价格，可以命名为\"A_ProductPrice_E0001\"，其中\"A\"表示WebApi，\"ProductPrice\"是属性的描述性名称，\"E0001\"是第1个错误。
 
-## 5.2 Other {#other-1 .unnumbered}
+## 5.2 Other 
 
 ​		其他规范可以根据业务需要具体去进行规范，更多规范需要在使用中探索\...\...
 
@@ -314,7 +314,7 @@ CSL类库源码地址GitLab
 
 # 第7章 CSL小插件 
 
-## 7.1 CSLEToUserLabelCSVTXT {#csletouserlabelcsvtxt .unnumbered}
+## 7.1 CSLEToUserLabelCSVTXT 
 
 ​		复制项目中CSLE枚举数据到，插件页面，点击转换按钮后即可获得CSVTXT文本，方便快速导入Excel中（图7.1）。
 
@@ -322,7 +322,7 @@ CSL类库源码地址GitLab
 
 <p style="text-align:center">图 7.1 CSLE枚举属性转UserLabelCSV文本</p>
 
-## 7.2 CSLEToDictionarylCSVTXT {#csletodictionarylcsvtxt .unnumbered}
+## 7.2 CSLEToDictionarylCSVTXT 
 
 ​		复制项目中CSLE枚举数据到，插件页面，点击转换按钮后即可获得CSVTXT文本，方便快速导入Excel中（图7.2）。
 
@@ -330,7 +330,7 @@ CSL类库源码地址GitLab
 
 <p style="text-align:center">图 7.2 CSLE枚举属性转DictionaryCSV文本</p>
 
-## 7.3 CSLELength {#cslelength .unnumbered}
+## 7.3 CSLELength 
 
 ​		复制项目中CSLE枚举名称数据到，插件页面，点击转换按钮后即可获得快速计算LabelName长度，LabelName
 最大长度为40（图7.3）。
